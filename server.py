@@ -106,7 +106,7 @@ class MinutesProcessor:
             raise
     
     async def analyze_with_gpt4(self, transcription: Dict[str, Any], custom_instructions: str = "", options: Dict[str, bool] = None) -> str:
-        """Analyze transcription using GPT-4"""
+        """Analyze transcription using GPT-4o-mini"""
         if options is None:
             options = {
                 'include_timestamps': True,
@@ -147,7 +147,7 @@ Formatting requirements:
         try:
             response = await asyncio.to_thread(
                 openai.ChatCompletion.create,
-                model="gpt-4",
+                model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": "You are a professional meeting minutes generator with expertise in creating structured, actionable meeting summaries."},
                     {"role": "user", "content": prompt}
@@ -158,7 +158,7 @@ Formatting requirements:
             
             return response.choices[0].message.content
         except Exception as e:
-            logger.error(f"Error analyzing with GPT-4: {str(e)}")
+            logger.error(f"Error analyzing with GPT-4o-mini: {str(e)}")
             raise
     
     def _format_segments(self, segments: list) -> str:
@@ -301,7 +301,7 @@ Formatting requirements:
         
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-4",
+                model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": "You are a professional meeting minutes generator with expertise in creating structured, actionable meeting summaries."},
                     {"role": "user", "content": prompt}
@@ -313,7 +313,7 @@ Formatting requirements:
             
             return response.choices[0].message.content
         except Exception as e:
-            logger.error(f"Error analyzing with GPT-4: {str(e)}")
+            logger.error(f"Error analyzing with GPT-4o-mini: {str(e)}")
             raise
     
     def cleanup(self):
@@ -412,7 +412,7 @@ def process_content():
         # Transcribe audio
         transcription = processor.transcribe_audio_sync(audio_path)
         
-        # Generate minutes using GPT-4
+        # Generate minutes using GPT-4o-mini
         minutes_html = processor.analyze_with_gpt4_sync(
             transcription, custom_instructions, options
         )
