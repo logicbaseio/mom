@@ -85,11 +85,18 @@ class MinutesProcessor:
                 'extractor_retries': 3,
                 'fragment_retries': 3,
                 'retry_sleep_functions': {'http': lambda n: min(4 ** n, 60)},
-                # Try to use browser cookies if available
-                'cookiesfrombrowser': ('chrome', None, None, None),
-                # Fallback options for better compatibility
-                'ignoreerrors': False,
-                'no_warnings': False,
+                # Enhanced options for better YouTube compatibility
+                'ignoreerrors': True,
+                'no_warnings': True,
+                'extract_flat': False,
+                'writesubtitles': False,
+                'writeautomaticsub': False,
+                # Additional headers for better authentication
+                'age_limit': None,
+                'geo_bypass': True,
+                'geo_bypass_country': 'US',
+                # Use embedded player for better access
+                'youtube_include_dash_manifest': False,
             }
             
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
