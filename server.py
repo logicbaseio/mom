@@ -480,14 +480,15 @@ def internal_error(e):
 
 if __name__ == '__main__':
     try:
+        port = int(os.getenv('PORT', 5001))
         print("Starting Minutes of Meeting Generator Server...")
         print(f"OpenAI API configured: {bool(openai.api_key)}")
-        print("Server will be available at: http://localhost:5001")
+        print(f"Server will be available at: http://0.0.0.0:{port}")
         print("\nTo set up OpenAI API key:")
         print("export OPENAI_API_KEY='your-api-key-here'")
         print("\nPress Ctrl+C to stop the server")
         
-        app.run(host='0.0.0.0', port=5001, debug=True)
+        app.run(host='0.0.0.0', port=port, debug=False)
     except KeyboardInterrupt:
         print("\nShutting down server...")
         processor.cleanup()

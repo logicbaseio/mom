@@ -1,0 +1,19 @@
+name: meeting-minutes-generator
+services:
+  - name: web
+    git:
+      branch: main
+      build_command: pip install -r requirements.txt
+      run_command: python server.py
+    instance_type: nano
+    ports:
+      - port: 8000
+        protocol: http
+    env:
+      - key: PORT
+        value: "8000"
+    regions:
+      - was
+    scaling:
+      min: 1
+      max: 1
