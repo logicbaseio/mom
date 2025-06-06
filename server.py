@@ -91,12 +91,9 @@ class MinutesProcessor:
                 'extract_flat': False,
                 'writesubtitles': False,
                 'writeautomaticsub': False,
-                # Additional headers for better authentication
-                'age_limit': None,
+                # Geo bypass options
                 'geo_bypass': True,
                 'geo_bypass_country': 'US',
-                # Use embedded player for better access
-                'youtube_include_dash_manifest': False,
             }
             
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
