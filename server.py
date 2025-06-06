@@ -85,6 +85,11 @@ class MinutesProcessor:
                 'extractor_retries': 3,
                 'fragment_retries': 3,
                 'retry_sleep_functions': {'http': lambda n: min(4 ** n, 60)},
+                # Try to use browser cookies if available
+                'cookiesfrombrowser': ('chrome', None, None, None),
+                # Fallback options for better compatibility
+                'ignoreerrors': False,
+                'no_warnings': False,
             }
             
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
