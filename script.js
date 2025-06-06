@@ -1,7 +1,14 @@
 // Minutes of Meeting Generator - Main JavaScript File
 
-// API Configuration
-const API_BASE_URL = 'http://localhost:5001/api';
+// API Configuration - Auto-detect environment
+const API_BASE_URL = (() => {
+    // If running on localhost, use local server
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:5001/api';
+    }
+    // If running in production, use the same domain
+    return `${window.location.protocol}//${window.location.host}/api`;
+})();
 
 class MinutesGenerator {
     constructor() {
